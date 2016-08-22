@@ -41,11 +41,11 @@ pars2 <- c(ts/6, ts*5/6 , m0, m1, c0, c1)
 pars3 <- c(ts/2, ts/2 , m0, m1, tc*2/3, tc/3)
 pars4 <- c(ts/2, ts/2 , m0, m1, tc*5/6, tc/6)
 
-# for asymmetric extinction rate
+# for asymmetric extinction rate I
 pars5 <- c(ts/2, ts/2 , tm*2/3, tm*1/3, tc/2, tc/2)
 pars6 <- c(ts/2, ts/2 , tm*5/6, tm*1/6, tc/2, tc/2)
 
-# for asymmetric extinction rate
+# for asymmetric extinction rate II
 pars7 <- c(ts/2, ts/2 , 3*tm*2/3, 3*tm*1/3, tc/2, tc/2)
 pars8 <- c(ts/2, ts/2 , 3*tm*5/6, 3*tm*1/6, tc/2, tc/2)
 pars9 <- c(ts/2, ts/2 , 3*tm*1/2, 3*tm*1/2, tc/2, tc/2)
