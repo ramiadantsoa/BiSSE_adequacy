@@ -1,0 +1,74 @@
+\title{Notes on analytical results for branching processes}
+\author{ Tanjona Ramiadantsoa}
+\date{\today}
+
+\documentclass[12pt]{article}
+\usepackage{amsmath}
+
+\begin{document}
+\maketitle
+
+\section{Yule process}
+\label{sec:Yule}
+The Yule process is branching process called pure birth.
+The rate of birth is $\lambda$ and the dynamics is,
+if $n$ is the number of lineage at time $T$, then the rate of change is
+\begin{equation*}
+  \frac{d n}{dt} = n \lambda.
+\end{equation*}
+
+If $P_{n}(t)$ is the probability of having $n$ lineages at time $t$ and $P_{n_0}(0) =  0$ the probability that at time 0, there are $n_0$ lineages ($n_0$ is just the initial condition), then probability of having $n+1$ at time $t+dt$ is
+
+ \begin{align*}
+  P_{n+1} (t + dt)  & = P_n(t) n \lambda dt  + P_{n+1}(t) (1  - (n+1) \lambda dt) \\
+                   & =  P_{n+1}(t)  + \lambda dt (n P_n(t)  - (n+1) P_{n+1}(t))\\
+ \frac{d P_{n+1}}{dt} & = \lambda \left[n P_n(t) - (n+1) P_{n+1}(t)\right]
+\end{align*}
+%
+The solution is a negative binomial
+\begin{equation}
+  P_{n+1}(t)  = \binom{n}{n+1 - n_0}  \left( e^{-\lambda t}\right)^{n_0} \left( 1 - e^{-\lambda t} \right)^{n+1 - n_0}
+\end{equation}
+which is the probability of having $n_0$ success after $n+1$ trial (the $n+1$) trial should be a success. % http://www.pitt.edu/~super7/19011-20001/19531.pdf
+
+A trick is to use exponential generating function $\Phi_N(s) = E(e^{-s N})$.
+The mean should be $\Phi'(1)  =  \frac{1}{p}$ and the variance $\Phi''(1)  =  \dfrac{1}{p^2} - \dfrac{1}{p}$.
+
+Here $p = e^{-\lambda t}$ and thus $E[n(t)]  = n_0 e^{-\lambda t}$ and the variance (just use the definition above).
+
+\section{Constant birth-death process}
+\label{sec:bd}
+The equation is as before but includes $P_{n-1}, P_n, P_{n+1}$, the mean becomes
+\begin{equation*}
+  E[n(t)] = n_0 e^{(\lambda - \mu) t},
+\end{equation*}
+and the variance
+\begin{equation*}
+  V[n(t)] = n_0 e^{2(\lambda - \mu) t}\left[ 1 - e^{(\mu  - \lambda) t } \right] \dfrac{\lambda + \mu}{\lambda - \mu}.
+\end{equation*}
+
+Compared with simulation and it gives the correct results.
+
+\section{BiSSE}
+\label{sec:BiSSE}
+This section is for the average number of lineage over time.
+First, the equilibrium frequency of being in state 0 is the root of
+\begin{equation*}
+  (\lambda_0 - \mu_0  - \lambda_1 + \mu_1) x (1 -x)  - x q_{01} + (1 - x ) q_{10} = 0
+\end{equation*}
+If $\hat{x}$ is the root ($\in[0,1]$) and $\hat{x}$ (resp. ($1 - \hat{x}$)) is the probability of being in state 0 (resp. 1) at the root, then the expected number of lineage at time t is
+\begin{equation*}
+  E[n(t)]  = \exp \left([\hat{x} (\lambda_0 - \mu_0) +  (1 - \hat{x}) (\lambda_1 - \mu_1)]t \right).
+\end{equation*}
+
+If we assume that the root state is 0, (and note $g  = \lambda_0 - \mu_0 - \lambda_1 + \mu_1$), then
+\begin{equation*}
+  E_0[n(t)]  = E[n(t)] \left[ 1- \dfrac{g(1-x)^2}{g(1-x)^2 - q_{01}}\right]  + \exp[(\lambda_0 - \mu_0 - \dfrac{q_{01}}{1-x}) T] \left[\dfrac{g(1-x)^2}{g(1-x)^2 - q_{01}} \right]
+\end{equation*}
+%
+and if the root state is 1, then
+\begin{equation*}
+  E_1[n(t)]  = E[n(t)] \left[ 1- \dfrac{g x^2}{g x^2 - q_{10}}\right]  + \exp[(\lambda_1 - \mu_1 - \dfrac{q_{10}}{x}) t] \left[\dfrac{g x^2}{g x^2 - q_{10}} \right]
+\end{equation*}
+
+\end{document}
